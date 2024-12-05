@@ -1,7 +1,8 @@
 package peaksoft.api;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.dto.request.AuthRequest;
 import peaksoft.dto.request.LoginRequest;
@@ -16,7 +17,7 @@ public class AuthAPI {
     private final UserService userService;
 
 
-    @PostMapping
+    @PostMapping("/sign-up")
     public SimpleResponse signUp(@RequestBody AuthRequest authRequest) {
         return userService.signUp(authRequest);
     }
@@ -27,6 +28,7 @@ public class AuthAPI {
     }
 
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{id}")
     public AuthResponse getUser(@PathVariable("id") Long id) {
         return userService.findById(id);

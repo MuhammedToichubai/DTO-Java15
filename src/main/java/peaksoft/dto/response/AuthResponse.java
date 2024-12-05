@@ -3,6 +3,7 @@ package peaksoft.dto.response;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import peaksoft.enums.Role;
 
 @Builder
 @Getter
@@ -10,5 +11,5 @@ import lombok.Getter;
 public class AuthResponse {
     private Long userId;
     private String email;
-    private String role;
+    private Role role;
 }
